@@ -1,0 +1,15 @@
+/* @import '~antd/es/style/themes/default.less'; */
+
+.copy-button{
+  color: rgb(0, 0, 255);
+  border-left: 0px;
+}
+.ant-form-item-control-input-content{
+    display: flex;
+}
+.myform{
+width: 45%;
+}
+.myform--password{
+ 
+}
