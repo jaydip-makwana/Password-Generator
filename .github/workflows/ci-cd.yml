@@ -11,6 +11,6 @@ jobs:
         run: docker-compose -f "docker-compose.yml" build
       - uses: peter-evans/dockerhub-description@v3
         with:
-          username: "makwana9548"
-          password: "g!)M.,6uxT/Zgst"
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
           repository: jaydipmakwana9548/my
