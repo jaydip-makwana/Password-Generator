@@ -1,15 +1,11 @@
 name: learn-github-action
 on:
   push:
-    branches: [master]
+    branches: [main]
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "14"
-      - run: npm install -g bats
-      - run: bats -v
+      - name: Build docker image
+        run: docker-compose -f "docker-compose.yml" build
