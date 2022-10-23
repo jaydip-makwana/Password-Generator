@@ -1,8 +1,9 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import "antd/dist/antd.css";
-import { Button, Checkbox, Form, Input, message } from "antd";
+import { Button, Checkbox, Form, Input, message, Slider,Row,Col ,InputNumber} from "antd";
 import { CopyOutlined } from "@ant-design/icons";
 import "./InputData.css";
+
 
 export default function InputData() {
   const options: string[] = ["Number", "Uppercase", "Lowercase", "Symbol"];
@@ -10,15 +11,16 @@ export default function InputData() {
   const [selectedOptions, setselectedOptions] = useState(options)
   // TODO: What type and How to assign ?
   const [password, setPassword] = useState("")
+  const [length, setlength] = useState(5)
 
-  const getPassword = (values:any) => {
+  const getPassword = () => {
 
     const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     const lowercase = "zyxwvutsrqponmlkjihgfedcba"
     const number = "1234567890"
     const symbol = "!@#$%^&*()_{}[]+="
 
-    var length:Number = 15
+    // var length:Number = 15
     var password:string = ""
     // console.log("PPPPPPPPPPPPPPPPPPPPPPPPPP ",selectedOptions)
     for(let i=0;i<length;i++){
@@ -61,6 +63,13 @@ export default function InputData() {
     navigator.clipboard.writeText(password);
     message.info("Copied successfully",2)
   }
+  
+  useEffect(() => {
+    getPassword();
+  }, [length])
+  const onChange = (newValue: number) => {
+    setlength(newValue);
+  };
   return (
     <div className="myform">
       <Form className="myform--password" onFinish={getPassword} >
@@ -82,9 +91,35 @@ export default function InputData() {
         <Checkbox.Group options={options} defaultValue={options} onChange={getOptions}/>
         <br /> <br />
         <Form.Item>
-          <Button type="primary" htmlType="submit" >
+          <Row>
+
+            <Col span={12}>
+          <Slider
+            min={5}
+            max={30}
+            style={{
+              padding:'10px',
+              width:"200px"
+            }}
+            onChange={onChange}
+            value={typeof length === "number" ? length : 0}
+            />
+      </Col>
+            <Col span={4}>
+        <InputNumber
+          min={5}
+          max={30}
+          style={{
+            margin: '0 40px',
+          }}
+          value={length}
+          onChange={onChange}
+        />
+      </Col>
+            </Row>
+          {/* <Button type="primary" htmlType="submit" >
             Generate Password
-          </Button>
+          </Button> */}
         </Form.Item>
       </Form>
     </div>

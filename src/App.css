@@ -1,13 +1,21 @@
-.container{
+.container {
   margin-top: 10px;
   display: flex;
   justify-content: center;
 }
-.title{
- display: flex;
- justify-content: center;
+
+.title {
+  display: flex;
+  justify-content: center;
 
 }
-.title > h1{
+
+.title>h1 {
   display: inline;
+  /* color: white; */
+}
+
+.App {
+  /* background-color: black; */
+  height: 100vh;
 }
