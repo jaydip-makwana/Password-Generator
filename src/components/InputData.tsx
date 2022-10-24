@@ -18,7 +18,7 @@ export default function InputData() {
     const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     const lowercase = "zyxwvutsrqponmlkjihgfedcba"
     const number = "1234567890"
-    const symbol = "!@#$%^&*()_{}[]+="
+    const symbol = "!@#$/%^&*()_-{[]}]+="
 
     // var length:Number = 15
     var password:string = ""
@@ -66,33 +66,33 @@ export default function InputData() {
   
   useEffect(() => {
     getPassword();
-  }, [length])
+  }, [length,selectedOptions])
   const onChange = (newValue: number) => {
     setlength(newValue);
   };
   return (
     <div className="myform">
       <Form className="myform--password" onFinish={getPassword} >
-        <Form.Item name="password"  labelCol={{
+        <Form.Item name="password" id="showpass"  labelCol={{
         span: 8,
         offset:30,
       }}>
-          <Input value={password}/>
+          <Input value={password} style={{padding:'10px 0px 5px 0px',fontSize:'35px'}}/>
           <Button
-            className="copy-button"
-            icon={
-              <CopyOutlined
-                id="copy-outline"
-                onClick={copyToClipBoard}
-              />
-            }
+            // className="copy-button"
+            // icon={
+            //   <CopyOutlined
+            //     id="copy-outline"
+            //     onClick={copyToClipBoard}
+            //   />
+            // }
           />
         </Form.Item>
         <Checkbox.Group options={options} defaultValue={options} onChange={getOptions}/>
         <br /> <br />
+        <h2>Password length</h2>
         <Form.Item>
           <Row>
-
             <Col span={12}>
           <Slider
             min={5}
@@ -120,6 +120,9 @@ export default function InputData() {
           {/* <Button type="primary" htmlType="submit" >
             Generate Password
           </Button> */}
+        </Form.Item>
+        <Form.Item>
+          <Button onClick={copyToClipBoard} type='primary'>Copy to Clipboard</Button>
         </Form.Item>
       </Form>
     </div>

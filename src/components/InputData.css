@@ -1,15 +1,19 @@
 /* @import '~antd/es/style/themes/default.less'; */
 
-.copy-button{
+.copy-button {
   color: rgb(0, 0, 255);
   border-left: 0px;
 }
-.ant-form-item-control-input-content{
-    display: flex;
+
+.ant-form-item-control-input-content {
+  display: flex;
 }
-.myform{
-width: 45%;
+
+.myform {
+  width: 55%;
+  /* border: 1px solid black; */
 }
-.myform--password{
- 
+
+.myform--password>#showpass {
+  width: 100%;
 }
