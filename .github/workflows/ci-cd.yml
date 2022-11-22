@@ -2,17 +2,27 @@ name: learn-github-action
 on:
   push:
     branches: [main]
-env:
-  repo: jaydipmakwana9548/my
 jobs:
-  check-bats-version:
+  Deploy:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [v10.19.0]
     steps:
-      - uses: actions/checkout@v3
-      - name: Build docker image
-        run: docker-compose -f "docker-compose.yml" build
-      - uses: peter-evans/dockerhub-description@v3
+      - name: Set up Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          repository: ${{env.repo}}
+          node-version: ${{ matrix.node-version }}
+      - uses: actions/checkout@v3
+      - name: install gh-pages
+        run: |
+          npm install gh-pages --save-dev
+      - name: run deploy command
+        run: |
+          npm run deploy
+
+      # - uses: peter-evans/dockerhub-description@v3
+      #   with:
+      #     username: ${{ secrets.DOCKERHUB_USERNAME }}
+      #     password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      #     repository: ${{env.repo}}
